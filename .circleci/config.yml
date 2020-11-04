@@ -20,7 +20,7 @@ jobs:
     steps:
       - run:
           command: |
-            echo "Hello WORLD! " <<NAME>>
+            echo "Hello WORLD! " $NAME
 
 workflows:
   # Name the workflow "welcome"
