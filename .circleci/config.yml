@@ -13,14 +13,14 @@ jobs:
     steps:
       - run:
           command: |
-            echo "Hello!"
+            echo "Hello!" $NAME
   print_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run:
           command: |
-            echo "Hello WORLD! " $NAME
+            echo "Hello WORLD!
 
 workflows:
   # Name the workflow "welcome"
