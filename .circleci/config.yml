@@ -36,6 +36,10 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
       - print_pipeline_id
+      - run:
+          name: FAILED
+          command: echo "FARTS FAILED HARD"
+          when: on_fail
 
 workflows:
   my_workflow:
