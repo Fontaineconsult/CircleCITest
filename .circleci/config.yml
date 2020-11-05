@@ -4,6 +4,14 @@ version: 2.1
 orbs:
   # Declare a dependency on the welcome-orb
 # Orchestrate or schedule a set of jobs
+
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
+
+
 jobs:
 
   save_hello_world_output:
@@ -19,8 +27,6 @@ jobs:
           paths:
             - output.txt
 
-
-
   print_output_file:
     working_directory: ~/tmp
     docker:
@@ -29,9 +35,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
-
-
-
+      - print_pipeline_id
 
 workflows:
   my_workflow:
