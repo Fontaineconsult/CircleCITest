@@ -15,14 +15,19 @@ jobs:
     parameters:
       stack-name:
         default: circle-ci-stack
+        type: string
       aws-access-key-id:
         default: $AWS_ACCESS_KEY_ID
+        type: string
       aws-region:
         default: us-west-2
+        type: string
       aws-secret-access-key:
         default: $AWS_SECRET_ACCESS_KEY
+        type: string
       profile-name:
         default: udacity
+        type: string
     branch:
       default: master
       description: |
