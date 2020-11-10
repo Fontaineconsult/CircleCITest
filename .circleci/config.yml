@@ -52,7 +52,7 @@ jobs:
           command: ls && cat inventory.txt
 
       - save_cache:
-          key: inventory-{{ .BuildNum }}
+          key: inventory-{{ pipeline.number }}
           paths:
             - inventory.txt
 
@@ -77,7 +77,7 @@ jobs:
           command: export ANSIBLE_HOST_KEY_CHECKING=False
       - restore_cache:
           keys:
-            - inventory-{{ .BuildNum }}
+            - inventory-{{ pipeline.number }}
       - run:
           name: Take a look
           command: ls && cat inventory.txt
