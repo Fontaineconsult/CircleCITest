@@ -43,7 +43,7 @@ jobs:
           command: ls
       - run:
           name: Deploy Stack
-          command: aws cloudformation create-stack --stack-name \<<parameters.stack-name>> --template-body=file://%2  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
+          command: aws cloudformation create-stack --stack-name << parameters.stack-name >> --template-body=file://%2  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
 
 workflows:
   my_workflow:
