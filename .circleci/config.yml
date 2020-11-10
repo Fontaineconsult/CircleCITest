@@ -44,7 +44,7 @@ jobs:
 
       - run:
           name: Create Inventory.txt
-          command: echo [All] >> notes.txt
+          command: echo [All] >> inventory.txt
 
       - run:
           name: Get IPS
