@@ -54,7 +54,7 @@ jobs:
             apk add --update ansible
       - run:
           name: Take a look
-          command: ls
+          command: sudo nano inventory.txt
       - run:
           name: Config server
           command: |
