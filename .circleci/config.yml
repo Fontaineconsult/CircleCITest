@@ -10,41 +10,44 @@ commands:
     steps:
       - run: echo ${CIRCLE_WORKFLOW_ID}
 
-
-
 jobs:
 
-  save_hello_world_output:
+  create_aws_env:
     working_directory: ~/tmp/
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          command: |
-            echo "text to output here" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
+    parameters:
+      stack-name: circle-ci-stack
+      aws-access-key-id:
+        default: $AWS_ACCESS_KEY_ID
+      aws-region:
+        default: us-west-2
+      aws-secret-access-key:
+        default: $AWS_SECRET_ACCESS_KEY
+      profile-name:
+        default: udacity
+    branch:
+      default: master
+      description: |
+        Git branch of retrieving GitHub URL of CloudFormation
+         template file
+      type: string
 
-  print_output_file:
-    working_directory: ~/tmp
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
-      - attach_workspace:
-          at: ~/thytyh
-      - run: cat ~/output.txt
-      - print_pipeline_id
+      - checkout
+      - aws-cli/configure:
+          aws-access-key-id: <<parameters.aws-access-key-id>>
+          aws-region: <<parameters.aws-region>>
+          aws-secret-access-key: <<parameters.aws-secret-access-key>>
+          configure-default-region: <<parameters.configure-default-region>>
+          profile-name: <<parameters.profile-name>
       - run:
-          name: FAILED
-          command: echo "FARTS FAILED HARD"
-          when: on_fail
+          name: Deploy Stack
+          command: aws cloudformation create-stack --stack-name <<parameters.stack-name>> --template-body=file://%2  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
+
+
 
 workflows:
   my_workflow:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+     - create_aws_env
