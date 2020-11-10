@@ -36,7 +36,6 @@ jobs:
           aws-access-key-id: <<parameters.aws-access-key-id>>
           aws-region: <<parameters.aws-region>>
           aws-secret-access-key: <<parameters.aws-secret-access-key>>
-          configure-default-region: <<parameters.configure-default-region>>
           profile-name: <<parameters.profile-name>>
       - run:
           name: take a look
