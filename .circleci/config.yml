@@ -44,6 +44,11 @@ jobs:
       - run:
           name: Get IPS
           command: aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
+      - save_cache:
+          key: inventory
+          paths:
+            - inventory.txt
+
   create_ansible_env:
     parameters:
       ansible-key-checking:
@@ -66,7 +71,9 @@ jobs:
       - run:
           name: disable ansible key checking
           command: export ANSIBLE_HOST_KEY_CHECKING=False
-
+      - restore_cache:
+          keys:
+            - inventory
       - run:
           name: Config server
           command: |
