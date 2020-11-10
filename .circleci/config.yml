@@ -45,8 +45,8 @@ jobs:
       - run:
           name: Create Inventory.txt
           command: echo [All] >> inventory.txt
-      -run:
-        - name: Wait for stack to complete
+      - run:
+          name: Wait for stack to complete
           command: aws cloudformation wait stack-create-complete --stack-name <<parameters.stack>>
       - run:
           name: Get IPS
