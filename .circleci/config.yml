@@ -53,9 +53,12 @@ jobs:
           command: |
             apk add --update ansible
       - run:
+          name: Take a look
+          command: ls
+      - run:
           name: Config server
           command: |
-            ansible-playbook -i inventory.txt aws_test.yml
+            ansible-playbook -i inventory.txt aws_test.yaml
 
 workflows:
   my_workflow:
