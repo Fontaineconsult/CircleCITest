@@ -41,6 +41,11 @@ jobs:
       - run:
           name: Deploy Stack
           command: aws cloudformation create-stack --stack-name << parameters.stack-name >> --template-body=file://aws_test.yaml  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
+
+      - run:
+          name: Create Inventory.txt
+          command: echo [All] >> notes.txt
+
       - run:
           name: Get IPS
           command: aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
@@ -66,14 +71,14 @@ jobs:
           command: |
             apk add --update ansible
       - run:
-          name: Take a look
-          command: cat inventory.txt
-      - run:
           name: disable ansible key checking
           command: export ANSIBLE_HOST_KEY_CHECKING=False
       - restore_cache:
           keys:
             - inventory
+      - run:
+          name: Take a look
+          command: cat inventory.txt
       - run:
           name: Config server
           command: |
