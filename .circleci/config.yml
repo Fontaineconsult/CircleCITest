@@ -41,6 +41,9 @@ jobs:
       - run:
           name: Deploy Stack
           command: aws cloudformation create-stack --stack-name << parameters.stack-name >> --template-body=file://aws_test.yaml  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
+      - run:
+          name: Get IPS
+          command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
   create_ansible_env:
     parameters:
       ansible-key-checking:
@@ -63,9 +66,7 @@ jobs:
       - run:
           name: disable ansible key checking
           command: export ANSIBLE_HOST_KEY_CHECKING=False
-      - run:
-          name: Get IPS
-          command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
+
       - run:
           name: Config server
           command: |
