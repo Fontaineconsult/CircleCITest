@@ -36,18 +36,14 @@ jobs:
           name: config CLI
           command: export AWS_ACCESS_KEY_ID=<< parameters.aws-access-key-id >> && export AWS_SECRET_ACCESS_KEY=<< parameters.aws-secret-access-key >> && export AWS_DEFAULT_REGION=<< parameters.aws-region >>
       - run:
-          name: take a look
-          command: ls
-      - run:
           name: Deploy Stack
           command: aws cloudformation create-stack --stack-name << parameters.stack-name >> --template-body=file://aws_test.yaml  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
-
       - run:
           name: Create Inventory.txt
           command: echo [All] >> inventory.txt
       - run:
           name: Wait for stack to complete
-          command: aws cloudformation wait stack-create-complete --stack-name <<parameters.stack>>
+          command: aws cloudformation wait stack-create-complete --stack-name << parameters.stack-name >>
       - run:
           name: Get IPS
           command: aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
