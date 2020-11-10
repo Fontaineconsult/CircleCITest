@@ -42,12 +42,17 @@ jobs:
           name: Deploy Stack
           command: aws cloudformation create-stack --stack-name << parameters.stack-name >> --template-body=file://aws_test.yaml  --region=us-west-2 --capabilities CAPABILITY_NAMED_IAM
   create_ansible_env:
+    parameters:
+      ansible-key-checking:
+        default: False
+        type: boolean
     docker:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["42:92:62:d5:3e:0b:48:52:4d:ba:39:70:ac:0c:09:eb"]
+          fingerprints:
+           - "42:92:62:d5:3e:0b:48:52:4d:ba:39:70:ac:0c:09:eb"
       - run:
           name: Install dependencies
           command: |
@@ -55,6 +60,9 @@ jobs:
       - run:
           name: Take a look
           command: cat inventory.txt
+      - run:
+          name: disable ansible key checking
+          command: export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
           name: Config server
           command: |
