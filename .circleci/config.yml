@@ -28,13 +28,6 @@ jobs:
       profile-name:
         default: udacity
         type: string
-    branch:
-      default: master
-      description: |
-        Git branch of retrieving GitHub URL of CloudFormation
-         template file
-      type: string
-
     docker:
       - image: amazon/aws-cli
     steps:
