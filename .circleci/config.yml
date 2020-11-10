@@ -13,7 +13,7 @@ commands:
 jobs:
   create_aws_env:
     parameters:
-      stack-name: circle-ci-stack
+      stack-name:
         default: circle-ci-stack
       aws-access-key-id:
         default: $AWS_ACCESS_KEY_ID
