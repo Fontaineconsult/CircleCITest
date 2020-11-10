@@ -1,0 +1,27 @@
+---
+- name: "update apt packages."
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: "upgrade packages"
+  become: yes
+  apt:
+    upgrade: yes
+
+- name: "Install NODEJS"
+  become: yes
+  apt:
+    name: nodejs
+
+- name: "Copy index.js"
+  copy:
+    src: roles/configure-server1/files/index.js
+    dest: /home/ubuntu/
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
+
+
+- name: "Run Node"
+  command: node /home/ubuntu/index.js

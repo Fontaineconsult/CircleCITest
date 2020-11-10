@@ -11,9 +11,7 @@ commands:
       - run: echo ${CIRCLE_WORKFLOW_ID}
 
 jobs:
-
   create_aws_env:
-    working_directory: ~/tmp/
     parameters:
       stack-name: circle-ci-stack
         default: circle-ci-stack
