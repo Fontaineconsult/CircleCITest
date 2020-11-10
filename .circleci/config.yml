@@ -75,4 +75,7 @@ workflows:
   my_workflow:
     jobs:
      - create_aws_env
-     - create_ansible_env
+     - create_ansible_env:
+         requires:
+           - create_aws_env
+
