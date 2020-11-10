@@ -64,6 +64,9 @@ jobs:
           name: disable ansible key checking
           command: export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
+          name: Get IPS
+          command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
+      - run:
           name: Config server
           command: |
             ansible-playbook -i inventory.txt main.yml
@@ -71,4 +74,5 @@ jobs:
 workflows:
   my_workflow:
     jobs:
+     - create_aws_env
      - create_ansible_env
