@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Config server
           command: |
-            ansible-playbook -i inventory.txt playbook.yml
+            ansible-playbook -i inventory.txt aws_test.yml
 
 workflows:
   my_workflow:
