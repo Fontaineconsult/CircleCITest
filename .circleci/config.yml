@@ -45,7 +45,7 @@ jobs:
           command: echo [All] >> inventory.txt
       - run:
           name: Wait for stack to complete
-          command: aws cloudformation wait stack-create-complete --stack-name-${CIRCLE_WORKFLOW_ID} << parameters.stack-name >> --region=us-west-2
+          command: aws cloudformation wait stack-create-complete --stack-name-<< parameters.stack-name >>-${CIRCLE_WORKFLOW_ID} << parameters.stack-name >> --region=us-west-2
       - run:
           name: Get IPS
           command: aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory.txt
