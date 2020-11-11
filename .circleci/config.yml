@@ -16,7 +16,7 @@ jobs:
   create_aws_env:
     parameters:
       stack-name:
-        default: circle-ci-stack
+        default: circle-ci-stack-{{ .Environment.CIRCLE_WORKFLOW_ID }}
         type: string
       aws-access-key-id:
         default: $AWS_ACCESS_KEY_ID
@@ -75,7 +75,7 @@ jobs:
         default: False
         type: boolean
     docker:
-      - image: circleci/node:9.9.0
+      - image: circleci/node
     steps:
       - checkout
       - add_ssh_keys:
