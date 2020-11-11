@@ -9,6 +9,11 @@
   apt:
     upgrade: yes
 
+- name: "Install NODEJS"
+  become: yes
+  apt:
+    name: nodejs
+
 - name: "Install npm"
   become: yes
   apt:
@@ -31,4 +36,3 @@
 
 - name: "Run Node"
   command: pm2 start /home/ubuntu/index.js
-
