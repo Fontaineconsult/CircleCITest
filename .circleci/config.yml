@@ -84,7 +84,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get install ansible
+            sudo apt-get install ansible
       - run:
           name: disable ansible key checking
           command: export ANSIBLE_HOST_KEY_CHECKING=False && export ANSIBLE_SSH_RETRIES=5
