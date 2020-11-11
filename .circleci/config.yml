@@ -75,7 +75,7 @@ jobs:
         default: False
         type: boolean
     docker:
-      - image: python:3.7-alpine3.11
+      - image: circleci/node:9.9.0
     steps:
       - checkout
       - add_ssh_keys:
