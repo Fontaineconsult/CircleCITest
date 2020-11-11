@@ -21,8 +21,8 @@
 
 - name: "Install Pm2"
   become: yes
-  global: yes
   npm:
+    global: yes
     name: pm2
 
 
